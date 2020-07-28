@@ -1,10 +1,38 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
-date:   2020-07-28 13:57:54 +0100
-categories: jekyll update
+title:  "SwiftUI: A Year On"
+date:   2020-07-28 15:07:54 +0100
+categories: SwiftUI, jekyll updarte
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+The SwiftUI framework was released by Apple at WWDC '19, and promised [a lot](https://developer.apple.com/news/?id=06032019b). WWDC '20 saw even more in the way of SwifUI improvements being announced, which I'll talk about in a future post. When I started my most recent project, I knew that I wanted to see for myself about this new way of building user interfaces - 'better apps with less code'. After my struggles with view controllers and storyboards when creating WhyPhone - particularly with accomodating screen sizes and Dynamic Type - the prospect was appealing.
+
+Unfortunately, I couldn't take advantage of most of the improvements announced at WWDC '20, as they were iOS 14 eexclusive. I was setting out to build a project that was intended to end up on the App Store, and I didn't want to wait until 14's public release. Nonetheless, my first impressions were immediately positive.
+
+One of the first things I noticed about SwiftUI was that it really was a new way of thinking. The SwiftUI view hierarchy - stacks, grids, containers, scroll views - was interesting, but the way of deploying views in code was where things truly differed from my previous experiences. Gone were the days of '@IBOutlets' for labels and '@IBActions' for buttons. Instead I found that UI elements were now contained under the auspices of 'var body: some View {'  and Labels were simply created in code using 'Label'. Buttons were a more interesting proposition, but they too seemed much simpler to create using SwiftUI than they had been. It therefore seemed that creating UI elements programatically in SwiftUI, as opposed to the strange mix of Storyboards and UIKit I had previously employed, was indeed a simpler proposition.
+
+An example of buttons and labels from WhyPhone, 2017.
+
+'''
+   @IBOutlet weak var Q4Label2: UILabel!
+   @IBOutlet weak var Q4Label: UILabel!
+   @IBAction func Q4Button(_ sender: Any) {
+
+'''
+
+And an example from Stadiums using SwiftUI, 2020. This example is of a button that opens the relevant Wikipedia page for the selected stadium.
+
+'''
+   Label("Stadiums")
+  Button("View on Wikipedia", action: { guard let link = URL(string: self.stadium.wikiLink), UIApplication.shared.canOpenURL(link) else {
+    return
+          }
+    // opens relevant wiki entry for stadium.
+     UIApplication.shared.open(link, options: [:],
+    completionHandler: nil)
+                
+                    })
+'''
+
 
 Jekyll requires blog post files to be named according to the following format:
 
