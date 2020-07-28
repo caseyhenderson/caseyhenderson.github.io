@@ -4,6 +4,11 @@ title: About
 permalink: /about/
 ---
 
-My name is Casey Henderson, and I'm currently studying Computer Science at Sheffield Hallam University. I've been programming since I was 13, when I first learned to code using Python. Since then, I've used many more languages, created a lot more stuff, and still need to search most things on Google. Most recently, I've been involved in C++, Java and Swift projects, and am currently in the process of completing an app using the SwiftUI framework. You can see all of my projects (or at least the ones that I remember to upload properly) on my[GitHub](https://github.com/caseyhenderson).
+Hi, I'm Casey! I'm currently studying Computer Science at Sheffield Hallam University. I've been programming since I was 13, when I first learned to code using Python. My passion is in making technology more accessible, more friendly, and also more enjoyable. To that end, I've found myself using all manner of programming languages, although I always seem to come back to Swift and developing for Apple devices.
 
-Feel free to also get in touch if you have any questions, or want to collab. I'm open to any kind of programming work, and am also seeking an industrial placement for 2021-22.
+Most recently, I've been involved in C++ and Java alongside my Swift projects, and am currently in the process of completing an app using the SwiftUI framework. You can see all of my projects (or at least the ones that I remember to upload properly) on my [GitHub](https://github.com/caseyhenderson).
+
+Feel free to get in touch - I'm on Twitter @caseyh08, and for any more formal queries (work, industrial placements, collab) send me an email at caseyhenderson13@gmail.com.
+
+
+'We used to dream about this stuff. Now we get to build it. It's pretty great.' - Steve Jobs, 2004
