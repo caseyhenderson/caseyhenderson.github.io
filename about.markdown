@@ -4,15 +4,5 @@ title: About
 permalink: /about/
 ---
 
-This is the base BOI theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
-
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+My name is Casey Henderson, and I'm currently studying Computer Science at Sheffield Hallam University. I've been programming since I was 13, when I first learned to code using Python. Since then, I've used many more languages, created a lot more stuff, and still need to search most things on Google. Most recently, I've been involved in C++, Java and Swift projects, and am currently in the process of completing an app using the SwiftUI framework. You can see all of my projects (or at least the ones that I remember to upload properly) on GitHub [title](https://github.com/caseyhenderson).
+    I'm also currently seeking industrial placements for 2021-22, so please get in touch if you're interested. Feel free to also get in touch if you have any questions, or want to collab.
