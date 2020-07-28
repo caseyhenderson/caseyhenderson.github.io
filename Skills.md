@@ -4,8 +4,6 @@ title: "Skills"
 permalink: https://caseyhenderson.github.io/skills
 ---
 
-# SKILLS
-
 ## Swift
 - WhyPhone (2017)
 - Stadiums (2020)
