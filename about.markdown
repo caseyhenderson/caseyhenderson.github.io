@@ -11,4 +11,4 @@ Most recently, I've been involved in C++ and Java alongside my Swift projects, a
 Feel free to get in touch - I'm on Twitter @caseyh08, and for any more formal queries (work, industrial placements, collab) send me an email at caseyhenderson13@gmail.com.
 
 
-'We used to dream about this stuff. Now we get to build it. It's pretty great.' - Steve Jobs, 2004
+[^1]'We used to dream about this stuff. Now we get to build it. It's pretty great.' - Steve Jobs, 2004

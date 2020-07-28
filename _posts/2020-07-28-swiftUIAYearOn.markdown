@@ -12,16 +12,17 @@ One of the first things I noticed about SwiftUI was that it really was a new way
 
 An example of buttons and labels from WhyPhone, 2017.
 
-'''
+```
    @IBOutlet weak var Q4Label2: UILabel!
    @IBOutlet weak var Q4Label: UILabel!
    @IBAction func Q4Button(_ sender: Any) {
 
-'''
+```
+
 
 And an example from Stadiums using SwiftUI, 2020. This example is of a button that opens the relevant Wikipedia page for the selected stadium.
 
-'''
+```
    Label("Stadiums")
   Button("View on Wikipedia", action: { guard let link = URL(string: self.stadium.wikiLink), UIApplication.shared.canOpenURL(link) else {
     return
@@ -31,11 +32,13 @@ And an example from Stadiums using SwiftUI, 2020. This example is of a button th
     completionHandler: nil)
                 
                     })
-'''
+```
+
 
 As I developed my application, I encountered more and more different UI elements and new ways of doing things. These included the '.sheet' modal, a way of modallly presenting a view controller over another view (like present() in UIKit) - only of course without mentioning view controllers. Instead, the simple View is the order of the day in SwiftUI, in all its many forms. One of the most common forms of this can be seen below.
 
-'''
+```
+
 struct StadiumDetail: View {
 
   // define states, environment objects and other variables here
@@ -46,18 +49,20 @@ struct StadiumDetail: View {
       }
   }
 }
-'''
+```
+
 
 As I progressed, I found that this meant that my project files grew in number more than I was expecting, with a new file for almost every View. Some were re-used, like MapView, but many were single-use. As a result, I would strongly recommend a good, easy-to-understand folder structure for a SwiftUI project, to separate views and also to separate them from models or other code files. This greatly improved my own ease-of-access to my files, as well as my project organisation. The number of views was no hindrance, however, and in fact I grew to like it. I also appreciated the ease of including Views in stacks, like so:
 
-'''
+```
 VStack {
   MapView(coordinate: stadium.locationCoordinate)
                     .edgesIgnoringSafeArea(.all)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
 }
 
-'''
+```
+
 
 In this example, MapView is used in the StadiumDetail view. Contained in a separate file, it is easily called with MapView() and passed the data it requires. This means that MapView itself needs only be written once - in the MapView file - and then used wherever in the project. With SwiftUI, I found that in general using Views like this was intuitive and easy enough. I also was pleased that the introduced Views conformed to the specified layouts (for example to the Stack they were in) and therefore a seamless UI could be produced.
 
