@@ -1,8 +1,10 @@
+---
 layout: page
 title: "Skills"
 permalink: https://caseyhenderson.github.io/skills
+---
 
-#SKILLS
+# SKILLS
 
 ## Swift
 - WhyPhone (2017)
