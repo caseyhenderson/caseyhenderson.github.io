@@ -4,9 +4,9 @@ title:  "SwiftUI: A Year On"
 date:   2020-07-28 15:07:54 +0100
 categories: SwiftUI, jekyll updarte
 ---
-The SwiftUI framework was released by Apple at WWDC '19, and promised [a lot](https://developer.apple.com/news/?id=06032019b). WWDC '20 saw even more in the way of SwifUI improvements being announced, which I'll talk about in a future post. When I started my most recent project, I knew that I wanted to see for myself about this new way of building user interfaces - 'better apps with less code'. After my struggles with view controllers and storyboards when creating WhyPhone - particularly with accomodating screen sizes and Dynamic Type - the prospect was appealing. I'm also passionate about making my apps more accessible, and so SwiftUI's promise of beautiful, intuitive UI was a further draw.
+The SwiftUI framework was released by Apple at WWDC '19, and promised [a lot](https://developer.apple.com/news/?id=06032019b). WWDC '20 saw even more in the way of SwiftUI improvements being announced, which I will talk about in a future post. When I started my most recent project, I knew that I wanted to see for myself about this new way of building user interfaces - 'better apps with less code'. After my struggles with view controllers and storyboards when creating WhyPhone - particularly with accommodating screen sizes and Dynamic Type - the prospect was appealing. I'm also passionate about making my apps more accessible, and so SwiftUI's promise of beautiful, intuitive UI was a further draw.
 
-Unfortunately, I couldn't take advantage of most of the improvements announced at WWDC '20, as they were iOS 14 eexclusive. I was setting out to build a project that was intended to end up on the App Store, and I didn't want to wait until 14's public release. Nonetheless, my first impressions were immediately positive.
+Unfortunately, I couldn't take advantage of most of the improvements announced at WWDC '20, as they were iOS 14 exclusive. I was setting out to build a project that was intended to end up on the App Store, and I didn't want to wait until 14's public release. Nonetheless, my first impressions were immediately positive.
 
 One of the first things I noticed about SwiftUI was that it really was a new way of thinking. The SwiftUI view hierarchy - stacks, grids, containers, scroll views - was interesting, but the way of deploying views in code was where things truly differed from my previous experiences. Gone were the days of '@IBOutlets' for labels and '@IBActions' for buttons. Instead I found that UI elements were now contained under the auspices of 'var body: some View {'  and Labels were simply created in code using 'Label'. Buttons were a more interesting proposition, but they too seemed much simpler to create using SwiftUI than they had been. It therefore seemed that creating UI elements programatically in SwiftUI, as opposed to the strange mix of Storyboards and UIKit I had previously employed, was indeed a simpler proposition.
 
@@ -35,7 +35,7 @@ And an example from Stadiums using SwiftUI, 2020. This example is of a button th
 ```
 
 
-As I developed my application, I encountered more and more different UI elements and new ways of doing things. These included the '.sheet' modal, a way of modallly presenting a view controller over another view (like present() in UIKit) - only of course without mentioning view controllers. Instead, the simple View is the order of the day in SwiftUI, in all its many forms. One of the most common forms of this can be seen below.
+As I developed my application, I encountered more and more different UI elements and new ways of doing things. These included the '.sheet' modal, a way of modally presenting a view controller over another view (like present() in UIKit) - only of course without mentioning view controllers. Instead, the simple View is the order of the day in SwiftUI, in all its many forms. One of the most common forms of this can be seen below.
 
 ```
 
