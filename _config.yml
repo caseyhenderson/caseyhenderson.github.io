@@ -21,7 +21,7 @@
 title: Casey Henderson
 email: caseyhenderson13@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  The personal portfoilio website of Casey Henderson, software developer. This is where I talk about code, the process, and crazy ideas and future projects.
+  This is my personal portfolio website, where I talk about projects, programming and crazy ideas.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://caseyhenderson.github.io"
 twitter_username: caseyh08
