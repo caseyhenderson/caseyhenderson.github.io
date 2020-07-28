@@ -2,7 +2,7 @@
 layout: post
 title:  "SwiftUI: A Year On"
 date:   2020-07-28 15:07:54 +0100
-categories: SwiftUI, jekyll updarte
+categories: SwiftUI
 ---
 The SwiftUI framework was released by Apple at WWDC '19, and promised [a lot](https://developer.apple.com/news/?id=06032019b). WWDC '20 saw even more in the way of SwiftUI improvements being announced, which I will talk about in a future post. When I started my most recent project, I knew that I wanted to see for myself about this new way of building user interfaces - 'better apps with less code'. After my struggles with view controllers and storyboards when creating WhyPhone - particularly with accommodating screen sizes and Dynamic Type - the prospect was appealing. I'm also passionate about making my apps more accessible, and so SwiftUI's promise of beautiful, intuitive UI was a further draw.
 
