@@ -12,7 +12,7 @@ The picker is a UI element of considerable popularity, and also one that has a l
 It is possible to define a custom style: however in most cases the styles provided by SwiftUI work just fine. These all conform to the protocol PickerStyle, and are applied thusly:
 
 ```
-Picker("This is a picker", seleection: whatever) {
+Picker("This is a picker", selection: whatever) {
     // picker code
 }
 .pickerStyle(examplePickerStyle())
@@ -20,7 +20,7 @@ Picker("This is a picker", seleection: whatever) {
 ```
 
 * DefaultPickerStyle: on iOS and watchOS this defaults to a wheel, whereas on macOS it defaults to a pop-up button. On tvOS the default is a segmented control. Use this when the specific style of your picker is not important, as it takes the choice out of your hands.
-* PopUpButtonPickerStyle: exclusive to macOS 10.15+, this is to be used when there are more than five options. Here the button itself indicates the selected option. As the Apple documentation for tbis states, you can also include additional controls in the set of options, such as a button to customise the list presented.
+* PopUpButtonPickerStyle: exclusive to macOS 10.15+, this is to be used when there are more than five options. Here the button itself indicates the selected option. As the Apple documentation for this states, you can also include additional controls in the set of options, such as a button to customise the list presented.
     ![Example of pop-up picker](popup.png "This is a pop-up")
 * RadioGroupPickerStyle: another macOS 10.15+ exclusive, this is to be used when there are two to five options. Apple recommend that for each option's label, sentence-style capitalisation should be used (and no ending punctuation).
     ![Example of radio group picker](radio.png "This is a radio group picker")
@@ -44,7 +44,7 @@ enum Club: String, CaseIterable {
 }
 ````
 Bound Property
-: A bound property in SwiftUI is called a binding. It is an example of a property wrapper type that can be used to create a connection, going both ways, between a property that stores data (i.e. a variable) and a view that displays and/or changes the data. Apple describe this as connecting a property ot a source of truth stored elsewhere, rather than storing data directly. It also allows us to share the value in both places, making life easier when coding.
+: A bound property in SwiftUI is called a binding. It is an example of a property wrapper type that can be used to create a connection, going both ways, between a property that stores data (i.e. a variable) and a view that displays and/or changes the data. Apple describe this as connecting a property it a source of truth stored elsewhere, rather than storing data directly. It also allows us to share the value in both places, making life easier when coding.
 
 Property Wrapper
 :a structure that encapsulates read and write access to the property and adds any additional behaviour (so controls which methods, etc. can read and write and what further behaviour the property needs to exhibit).
@@ -90,7 +90,7 @@ enum Selection: String, CaseIterable, Identifiable {
     // this will eventually allow for iteration
 }
 @ State private var selectedSelection = Selection.One
-Picker("This is a picker", seleection: $selectedSelection) {
+Picker("This is a picker", selection: $selectedSelection) {
     ForEach(Selection.allCases) { selection in 
     Text(selection.rawValue)
     // can also capitalise as requested by just adding .capitalized here
@@ -121,7 +121,7 @@ extension SelectionExtension {
 }
 
 @ State private var selectedSelection = Selection.One
-Picker("This is a picker", seleection: $selectedSelection) {
+Picker("This is a picker", selection: $selectedSelection) {
     ForEach(Selection.allCases) { selection in 
     Text(selection.rawValue)
         .tag(selection.selectedSelection)
@@ -178,7 +178,7 @@ Step Three: UserDefaults
 Our code before is great, but it doesn't actually work. For it to work, we need to implement UserDefaults properly, and for that we need to use an extension. If you've not used one before, here's the definition:
 
 Extension (Swift)
-: Extensions add new functionality to an exisitng class, structure, enum, or protocol type. They can even do this if we don't have access to the original source code of that class (retroactive functionality). Examples of their use include adding functions and computed properties, providing new initialisers (i.e. constructors), defining and using new nested types, making existing types conform to a protocol, and adding default implementations to protocols with protocol extensions.
+: Extensions add new functionality to an existing class, structure, enum, or protocol type. They can even do this if we don't have access to the original source code of that class (retroactive functionality). Examples of their use include adding functions and computed properties, providing new initialisers (i.e. constructors), defining and using new nested types, making existing types conform to a protocol, and adding default implementations to protocols with protocol extensions.
 
 Our extension is intended to add functionality to UserDefaults. In this case, we're going to add a private struct, to provide the Keys UserDefaults wants, and we're also going to add custom get and set methods for our properties. First, we should define the struct.
 
