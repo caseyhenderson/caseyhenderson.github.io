@@ -18,6 +18,7 @@ Picker("This is a picker", selection: whatever) {
 .pickerStyle(examplePickerStyle())
 
 ```
+# Provided Styles
 
 * DefaultPickerStyle: on iOS and watchOS this defaults to a wheel, whereas on macOS it defaults to a pop-up button. On tvOS the default is a segmented control. Use this when the specific style of your picker is not important, as it takes the choice out of your hands.
 * PopUpButtonPickerStyle: exclusive to macOS 10.15+, this is to be used when there are more than five options. Here the button itself indicates the selected option. As the Apple documentation for this states, you can also include additional controls in the set of options, such as a button to customise the list presented.
@@ -29,6 +30,7 @@ Picker("This is a picker", selection: whatever) {
 * WheelPickerStyle: available on watchOS 6.0+, Mac Catalyst 13.0+ and iOS 13+, this picker style has good platform coverage (with only tvOS excluded) and is pretty common as a result (a good example can be found in the EA Sports Fifa 20 Companion App). It's important to organise options for this picker in a predictable order, as most won't be visible immediately (Apple suggest alphabetical order: it's up to you).
     ![Example of wheel picker](wheel.png "This is a wheel picker")
 
+# Implementing Functionality 
 
 Once you've chosen a style, it's time to implement your picker's functionality. Pickers need three main things: a selection binding, a label, and content to display. 
 
@@ -47,7 +49,7 @@ Bound Property
 : A bound property in SwiftUI is called a binding. It is an example of a property wrapper type that can be used to create a connection, going both ways, between a property that stores data (i.e. a variable) and a view that displays and/or changes the data. Apple describe this as connecting a property it a source of truth stored elsewhere, rather than storing data directly. It also allows us to share the value in both places, making life easier when coding.
 
 Property Wrapper
-:a structure that encapsulates read and write access to the property and adds any additional behaviour (so controls which methods, etc. can read and write and what further behaviour the property needs to exhibit).
+: A structure that encapsulates read and write access to the property and adds any additional behaviour (so controls which methods, etc. can read and write and what further behaviour the property needs to exhibit).
 
 * Set the label to whatever you want. 
 * Then provide the content, usually in the form of either Text or Image. Append a .tag to each entry so that the type of each selection matches the type of the corresponding bound state variable, otherwise your picker won't work.
@@ -76,6 +78,9 @@ struct Whatever: View
 }
 
 ```
+
+# Using ForEach for many options
+
 Fortunately, you don't need to explicitly list each option. In my Stadiums application, I had 92 clubs to choose from, and some pickers will need to choose from even more options. Instead, just use ForEach, like so:
 
 ```
@@ -131,15 +136,18 @@ Picker("This is a picker", selection: $selectedSelection) {
 .pickerStyle(defaultPickerStyle())
 
 ```
-Now, you should have a picker that looks good and functions well. Close the app, however, and you might notice that the selected choice hasn't been saved. In a lot of situations, it doesn't need to be. When I was developing my most recent app, Stadiums, I had a picker that let the user choose their favourite club - something that definitely did need to be saved. This left me with a problem to solve.
 
-First, I needed to consider my options with regards to actually storing data persistently (i.e. after the user closes the app). The data in question was not of great size, being in essence a String, and so my thoughts immediately turned to UserDefaults. This can be used to store data (as long as it's of any basic type: Bool, Float, Double, Int, String, URL - but also arrays, dictionaries, Date and Data) for as long as the app is installed. When you write data to UserDefaults, it automatically gets loaded on app start-up so it can be read back again. As you might have guessed, too much in UserDefaults will make your app slow to load (100KB is the generally accepted limit).
+# Persistent Pickers
+
+Now, you should have a picker that looks good and functions well. Close the app, however, and you might notice that the selected choice hasn't been saved when you re-open the app. In a lot of situations, this is fine, and the picker choice doesn't need to be saved. When I was developing my most recent app, Stadiums, however, I had a picker that let the user choose their favourite club. This was something that definitely did need to be saved, so that their favourite club didn't reset every time they opened the app.
+
+First, I needed to consider my options with regards to storing data persistently (i.e. after the user closes the app). The data in question was not of great size, being in essence a String, and so my thoughts immediately turned to UserDefaults. This can be used to store data (as long as it's of any basic type: Bool, Float, Double, Int, String, URL - but also arrays, dictionaries, Date and Data) for as long as the app is installed. When you write data to UserDefaults, it automatically gets loaded on app start-up so it can be read back again. As you might have guessed, too much in UserDefaults will make your app slow to load (100KB is the generally accepted limit).
 
 Implementing this functionality is a little more complex than just UserDefaults, however. After hours on Google, I realised I would also need to use an ObservedObject. Classes that conform to ObservableObject can be used in more than one view (useful), and @ObservedObject allows for sharing across multiple views and custom types, while also being very similar to @State. Any type with ObservedObject, however, is always going to conform to ObservableObject protocol, and this was the case in my project.
 
 This next part is a lot more complicated, and requires a bit more code. I'll break it down into steps.
 
-Step One: Creating the ObservedObject and the State.
+# Step One: Creating the ObservedObject and the State.
 
 ```
 // more and more complicated, but it'll be worth it!
@@ -152,7 +160,7 @@ struct whatever: View {
 }
 ```
 
-Step Two: Creating the SettingsStore class conforming to ObservableObject.
+# Step Two: Creating the SettingsStore class conforming to ObservableObject.
 Check your imports, and make sure you've imported SwiftUI AND Combine.
 
 ```
@@ -173,7 +181,7 @@ final class SettingsStore: ObservableObject {
 
 As you can see, this class is a bit more complicated. First, we create a PassthroughSubject, which is why we need Combine. It doesn't have an initial value, and lets us adapt our existing imperative code to Combine (which, like SwiftUI, is declarative). Theory aside, its practical use here is to allow us to send new values through to our objects(i.e. when our picker is updated). The rest of the code implements UserDefaults, making sure our choice is stored there, and then also calls send on our other, PassthroughSubject variable (with its suspiciously similar name). This slightly tangled mess of code ensures two things: one, that our value is saved in UserDefaults, and two, that the separate but similar value storing the current choice is updated using PassthroughSubject. This ensures that our data continues to flow, and that it is correct.
 
-Step Three: UserDefaults
+# Step Three: UserDefaults
 
 Our code before is great, but it doesn't actually work. For it to work, we need to implement UserDefaults properly, and for that we need to use an extension. If you've not used one before, here's the definition:
 
@@ -213,12 +221,15 @@ extension UserDefaults {
     }
 }
 ```
+# Step Four: Finish
 
 That's a lot of code, so let's break it down. We've already covered Keys, so let's proceed to our static var, selectedSelection. We already defined the enum for this earlier, so we make sure it conforms to that (Selection). Then, we define the methods. To get the selectedSelection, we use if let: this will check in UserDefaults for our value (which will be stored as String, and also might not be stored yet: hence the need to use optionality with the ?, as this could return nil). If it's there, it will be returned, using rawValue and the ! to unwrap it (because if UserDefaults does contain our choice, we know that the optional variable we're using does definitely have a value - hence it's safe for us to unwrap. Probably.). We also have else: if nothing can be found in UserDefaults (for example if we haven't made a choice yet), the first picker option will be returned.
 
 Next, we have our set method. This goes right back to where we started - the idea of using UserDefaults to persistently store a value. Now we've done all that work, this just takes a single line, passing it our selectedSelection key as the forKey parameter, and newValue.rawValue to save our choice.
 
-And that is our job done, so congratulations! You now have a picker that will save your choice so that it is not deleted when the user closes your app. Full code below and on my [GitHub](https://github.com/caseyhenderson/PersistentPicker)
+And now we're done, so congratulations! You now have a picker that will save your choice so that it is not deleted when the user closes your app. Full code below and on my [GitHub](https://github.com/caseyhenderson/PersistentPicker)
+
+# Full Code
 
 ```
 import SwiftUI
