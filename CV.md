@@ -4,7 +4,8 @@ title: "Curriculum Vitae"
 permalink: https://caseyhenderson.github.io/CV
 ---
 <!-- <a href="https://github.com/caseyhenderson/caseyhenderson.github.io/blob/master/assets/CV.pdf" target = "_blank">CV.</a> -->
-<div style = "width: 100%; height: 250%">
-<embed src="/assets/CV.pdf" class="application/pdf" width = "100%" height="250%" />	
+<div style = "width: 100%; height: 500%">
+<embed src="/assets/CV.pdf" class="application/pdf" width = "100%" height="500%" />	
 </div>
+<a href="caseyhenderson.github.io/assets/CV.pdf" target="_blank">Download.</a>
 
