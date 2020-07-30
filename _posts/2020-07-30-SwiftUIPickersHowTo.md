@@ -22,13 +22,13 @@ Picker("This is a picker", selection: whatever) {
 
 * DefaultPickerStyle: on iOS and watchOS this defaults to a wheel, whereas on macOS it defaults to a pop-up button. On tvOS the default is a segmented control. Use this when the specific style of your picker is not important, as it takes the choice out of your hands.
 * PopUpButtonPickerStyle: exclusive to macOS 10.15+, this is to be used when there are more than five options. Here the button itself indicates the selected option. As the Apple documentation for this states, you can also include additional controls in the set of options, such as a button to customise the list presented.
-    ![Example of pop-up picker](popup.png "This is a pop-up")
+    ![Example of pop-up picker](/assets/images/popup.png "This is a pop-up")
 * RadioGroupPickerStyle: another macOS 10.15+ exclusive, this is to be used when there are two to five options. Apple recommend that for each option's label, sentence-style capitalisation should be used (and no ending punctuation).
-    ![Example of radio group picker](radio.png "This is a radio group picker")
+    ![Example of radio group picker](/assets/images/radio.png "This is a radio group picker")
 * SegmentedPickerStyle: available on iOS 13+, macOS 10.15+, tvOS 13+, and also with Mac Catalyst 13.0 (but not watchOS). This style supports Text and Image segments only.
-    ![Example of segmented picker](segment.png "This is a segmented picker")
+    ![Example of segmented picker](/assets/images/segment.png "This is a segmented picker")
 * WheelPickerStyle: available on watchOS 6.0+, Mac Catalyst 13.0+ and iOS 13+, this picker style has good platform coverage (with only tvOS excluded) and is pretty common as a result (a good example can be found in the EA Sports Fifa 20 Companion App). It's important to organise options for this picker in a predictable order, as most won't be visible immediately (Apple suggest alphabetical order: it's up to you).
-    ![Example of wheel picker](wheel.png "This is a wheel picker")
+    ![Example of wheel picker](/assets/images/wheel.png "This is a wheel picker")
 
 # Implementing Functionality 
 
@@ -141,7 +141,7 @@ Picker("This is a picker", selection: $selectedSelection) {
 
 Now, you should have a picker that looks good and functions well. Close the app, however, and you might notice that the selected choice hasn't been saved when you re-open the app. In a lot of situations, this is fine, and the picker choice doesn't need to be saved. When I was developing my most recent app, Stadiums, however, I had a picker that let the user choose their favourite club. This was something that definitely did need to be saved, so that their favourite club didn't reset every time they opened the app.
 
-First, I needed to consider my options with regards to storing data persistently (i.e. after the user closes the app). The data in question was not of great size, being in essence a String, and so my thoughts immediately turned to UserDefaults. This can be used to store data (as long as it's of any basic type: Bool, Float, Double, Int, String, URL - but also arrays, dictionaries, Date and Data) for as long as the app is installed. When you write data to UserDefaults, it automatically gets loaded on app start-up so it can be read back again. As you might have guessed, too much in UserDefaults will make your app slow to load (100KB is the generally accepted limit).
+First, I needed to consider my options with regards to actually storing data persistently (i.e. after the user closes the app). The data in question was not of great size, being in essence a String, and so my thoughts immediately turned to UserDefaults. This can be used to store data (as long as it's of any basic type: Bool, Float, Double, Int, String, URL - but also arrays, dictionaries, Date and Data) for as long as the app is installed. When you write data to UserDefaults, it automatically gets loaded on app start-up so it can be read back again. As you might have guessed, too much in UserDefaults will make your app slow to load (100KB is the generally accepted limit).
 
 Implementing this functionality is a little more complex than just UserDefaults, however. After hours on Google, I realised I would also need to use an ObservedObject. Classes that conform to ObservableObject can be used in more than one view (useful), and @ObservedObject allows for sharing across multiple views and custom types, while also being very similar to @State. Any type with ObservedObject, however, is always going to conform to ObservableObject protocol, and this was the case in my project.
 
