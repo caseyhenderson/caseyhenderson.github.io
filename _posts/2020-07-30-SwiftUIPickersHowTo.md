@@ -153,7 +153,7 @@ Implementing this functionality is a little more complex than just UserDefaults,
 
 This next part is a lot more complicated, and requires a bit more code. I'll break it down into steps.
 
-# Step One: Creating the ObservedObject and the State.
+## Step One: Creating the ObservedObject and the State.
 
 ```
 // more and more complicated, but it'll be worth it!
@@ -166,7 +166,7 @@ struct whatever: View {
 }
 ```
 
-# Step Two: Creating the SettingsStore class conforming to ObservableObject.
+## Step Two: Creating the SettingsStore class conforming to ObservableObject.
 Check your imports, and make sure you've imported SwiftUI AND Combine.
 
 ```
@@ -187,7 +187,7 @@ final class SettingsStore: ObservableObject {
 
 As you can see, this class is a bit more complicated. First, we create a PassthroughSubject, which is why we need Combine. It doesn't have an initial value, and lets us adapt our existing imperative code to Combine (which, like SwiftUI, is declarative). Theory aside, its practical use here is to allow us to send new values through to our objects(i.e. when our picker is updated). The rest of the code implements UserDefaults, making sure our choice is stored there, and then also calls send on our other, PassthroughSubject variable (with its suspiciously similar name). This slightly tangled mess of code ensures two things: one, that our value is saved in UserDefaults, and two, that the separate but similar value storing the current choice is updated using PassthroughSubject. This ensures that our data continues to flow, and that it is correct.
 
-# Step Three: UserDefaults
+## Step Three: UserDefaults
 
 Our code before is great, but it doesn't actually work. For it to work, we need to implement UserDefaults properly, and for that we need to use an extension. If you've not used one before, here's the definition:
 
