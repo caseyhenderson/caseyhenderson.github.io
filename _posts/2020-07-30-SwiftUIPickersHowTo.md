@@ -7,11 +7,11 @@ categories: how-to, SwiftUI
 
 ---
 
-The picker is a UI element of considerable popularity, and also one that has a lot of uses. So how do we use it in SwiftUI? And how do we make sure that our choices are actually saved when the user closes the app? 
+The humble picker is an important part of many user interfaces, and has many uses. This article addresses two things: how do we use it in SwiftUI? And how do we make sure that the choices users select using the picker are actually saved when the user closes the app? 
 
 First, we need to consider style.
 
-It is possible to define a custom style: however in most cases the styles provided by SwiftUI work just fine. These all conform to the protocol PickerStyle, and are applied thusly:
+It is possible to define a custom style for a picker: however in most cases the styles provided by SwiftUI work just fine. These all conform to the protocol PickerStyle, and are applied like this:
 
 ```
 Picker("This is a picker", selection: whatever) {
@@ -22,21 +22,21 @@ Picker("This is a picker", selection: whatever) {
 ```
 # Provided Styles
 
-* DefaultPickerStyle: on iOS and watchOS this defaults to a wheel, whereas on macOS it defaults to a pop-up button. On tvOS the default is a segmented control. Use this when the specific style of your picker is not important, as it takes the choice out of your hands.
+* DefaultPickerStyle: on iOS and watchOS this defaults to a wheel, whereas on macOS it defaults to a pop-up button. On tvOS the default is a segmented control. This makes it excellent for cross-platform apps, as none of the individual styles work on every platform.
 * PopUpButtonPickerStyle: exclusive to macOS 10.15+, this is to be used when there are more than five options. Here the button itself indicates the selected option. As the Apple documentation for this states, you can also include additional controls in the set of options, such as a button to customise the list presented.
     ![Example of pop-up picker](/assets/images/popup.png "This is a pop-up")
 * RadioGroupPickerStyle: another macOS 10.15+ exclusive, this is to be used when there are two to five options. Apple recommend that for each option's label, sentence-style capitalisation should be used. They also recommend not to use ending punctuation.
     ![Example of radio group picker](/assets/images/radio.png "This is a radio group picker")
-* SegmentedPickerStyle: available on iOS 13+, macOS 10.15+, tvOS 13+, and also with Mac Catalyst 13.0 (but not watchOS). This style supports Text and Image segments only.
+* SegmentedPickerStyle: available on iOS 13+, macOS 10.15+, tvOS 13+, and also with Mac Catalyst 13.0 (but not watchOS). This style supports Text and Image segments only. It's good for cross-platform apps that don't need to run on watchOS.
     ![Example of segmented picker](/assets/images/segment.png "This is a segmented picker")
-* WheelPickerStyle: available on watchOS 6.0+, Mac Catalyst 13.0+ and iOS 13+, this picker style has good platform coverage (with only tvOS excluded) and is pretty common as a result (a good example can be found in the EA Sports Fifa 20 Companion App). It's important to organise options for this picker in a predictable order, as most won't be visible immediately (Apple suggest alphabetical order: it's up to you).
+* WheelPickerStyle: available on watchOS 6.0+, Mac Catalyst 13.0+ and iOS 13+, this picker style has good platform coverage (with only tvOS excluded) and is pretty common as a result (a good example can be found in the EA Sports Fifa 20 Companion App). It's important to organise options for this picker in a predictable order, as most won't be visible immediately to the user. Apple suggest alphabetical order: it's up to you what you choose for your app.
     ![Example of wheel picker](/assets/images/wheel.png "This is a wheel picker")
 
 ## Implementing Functionality
 
 # Selection Binding
 
-Once you've chosen a style, it's time to implement your picker's functionality. Pickers need three main things: a selection binding, a label, and content to display. They take the selection binding first, and they take it as a parameter (selection: ), so do that first.
+Once you've chosen a style, it's time to implement your picker's functionality. Pickers need three main things: a selection binding, a label, and content to display. Let's look at the selection binding first. In SwiftUI, this is passed as (selection: ) and is the second parameter, after the picker label. 
 
 * Set the selection parameter to a bound property that provides the value to display as the current selection (for example an enum like so:)
 
@@ -49,11 +49,12 @@ enum Club: String, CaseIterable {
     case portsmouth = "Portsmouth"
 }
 ````
-# Bound Property
- A bound property in SwiftUI is called a binding. It is an example of a property wrapper type that can be used to create a connection, going both ways, between a property that stores data (i.e. a variable) and a view that displays and/or changes the data. Apple describe this as connecting a property it a source of truth stored elsewhere, rather than storing data directly. It also allows us to share the value in both places, making life easier when coding.
+# Bound Property/ Binding
+ A bound property in SwiftUI is called a binding. It is an example of a property wrapper type that can be used to create a connection, going both ways, between a property that stores data (i.e. a variable) and a view that displays and/or changes the data. 
+ Apple describe this as connecting a property to a source of truth stored elsewhere, rather than storing data directly. It also allows us to share the value in both places, making life easier when coding.
 
 # Property Wrapper
- A structure that encapsulates read and write access to the property and adds any additional behaviour (so controls which methods, etc. can read and write and what further behaviour the property needs to exhibit).
+ A structure that encapsulates read and write access to the property and adds any additional behaviour. This means that it controls which methods, etc. can read and write to the property and what further behaviour the property needs to exhibit.
 
 ## Implementing Functionality II: Labels, Content
 
@@ -87,7 +88,7 @@ struct Whatever: View
 
 ## Using ForEach 
 
-Fortunately, you don't need to explicitly list each option. In my Stadiums application, I had 92 clubs to choose from, and some pickers will need to choose from even more options. Instead, just use ForEach, like so:
+Fortunately, you don't need to explicitly list each option, as seen in the example above. In my Stadiums application, I had 92 clubs to choose from, and some pickers will need to choose from even more options. Instead, just use ForEach, like so:
 
 ```
 // Much, much easier.
@@ -110,7 +111,7 @@ Picker("This is a picker", selection: $selectedSelection) {
 .pickerStyle(defaultPickerStyle())
 
 ```
-The above is only possible if your Selection conforms to the Identifiable protocol: if it doesn't, you need an explicit tag, like so:
+The above is only possible if your Selection conforms to the Identifiable protocol: if it doesn't, you need an explicit tag, like this:
 
 ```
 enum Selection: String, CaseIterable {
@@ -145,7 +146,9 @@ Picker("This is a picker", selection: $selectedSelection) {
 
 ## Persistent Pickers
 
-Now you should have a picker that looks good and functions well. Close the app, however, and you might notice that the selected choice hasn't been saved when you re-open the app. In a lot of situations, this is fine, and the picker choice doesn't need to be saved. When I was developing my most recent app, Stadiums, however, I had a picker that let the user choose their favourite club. This was something that definitely did need to be saved, so that their favourite club didn't reset every time they opened the app.
+Now you should have a picker that looks good and functions well when you test it. Close the app, however, and you might notice that your choice hasn't been saved when you re-open the app. 
+
+In a lot of situations, this is fine, and the picker choice doesn't need to be saved. When I was developing my most recent app, Stadiums, however, I had a picker that let the user choose their favourite club. This was something that definitely did need to be saved, so that their favourite club didn't reset every time they opened the app.
 
 First, I needed to consider my options with regards to actually storing data persistently (i.e. after the user closes the app). The data in question was not of great size, being in essence a String, and so my thoughts immediately turned to UserDefaults. This can be used to store data (as long as it's of any basic type: Bool, Float, Double, Int, String, URL - but also arrays, dictionaries, Date and Data) for as long as the app is installed. When you write data to UserDefaults, it automatically gets loaded on app start-up so it can be read back again. As you might have guessed, too much in UserDefaults will make your app slow to load (100KB is the generally accepted limit).
 
